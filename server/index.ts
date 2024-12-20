@@ -3,20 +3,12 @@ import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import schema from './schema';
 
 const app = express();
 
 const server = new ApolloServer({
-  typeDefs: `
-    type Query {
-      hello: String
-    }
-  `,
-  resolvers: {
-    Query: {
-      hello: () => 'Hello GraphQL',
-    },
-  },
+  schema,
 });
 
 async function startServer() {
