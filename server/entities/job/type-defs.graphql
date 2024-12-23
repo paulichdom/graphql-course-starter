@@ -48,8 +48,8 @@ input CancelApplicationInput {
 }
 
 type Mutation {
-  createJob(input: CreateJobInput!): [Job!]!
+  createJob(input: CreateJobInput!): Job!
   deleteJob(input: DeleteJobInput!): Boolean!
   applyForJob(input: ApplyForJobInput!): Boolean!
-  cancelApplicaion(input: CancelApplicationInput!): Boolean!
+  cancelApplication(input: CancelApplicationInput!): Boolean!
 }
