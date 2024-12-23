@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import schema from './schema';
+import createContext from './context';
 
 const app = express();
 
@@ -22,7 +23,9 @@ async function startServer() {
     }),
     cookieParser(),
     express.json(),
-    expressMiddleware(server)
+    expressMiddleware(server, {
+      context: ({ req, res }) => createContext({ req, res }),
+    })
   );
 
   app.listen(4000, () => {

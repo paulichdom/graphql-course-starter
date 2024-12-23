@@ -6,6 +6,7 @@ const config: CodegenConfig = {
     './server/types/resolver-types.ts': {
       plugins: ['typescript', 'typescript-resolvers'],
       config: {
+        contextType: '../context#Context',
         defaulMapper: 'Partial<{T}>',
       },
     },

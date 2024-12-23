@@ -2,7 +2,7 @@ import { Resolvers } from '../../types/resolver-types';
 
 const resolvers: Resolvers = {
   Query: {
-    me: () => {
+    me: (root, args, context) => {
       return {
         id: '2',
       };
