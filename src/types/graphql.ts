@@ -47,7 +47,6 @@ export type Job = {
   __typename?: 'Job';
   company: Company;
   createdAt: Scalars['DateTime']['output'];
-  description: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   isApplied: Scalars['Boolean']['output'];
   location: Scalars['String']['output'];
@@ -134,11 +133,11 @@ export type SignupInput = {
 
 export type User = {
   __typename?: 'User';
-  appliedJobs: Array<Job>;
+  appliedJobs?: Maybe<Array<Job>>;
   email: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
-  ownedJobs: Array<Job>;
+  ownedJobs?: Maybe<Array<Job>>;
   role: UserRole;
 };
 
