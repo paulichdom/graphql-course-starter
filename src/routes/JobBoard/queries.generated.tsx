@@ -8,7 +8,7 @@ export type SearchJobsQueryVariables = Types.Exact<{
 }>;
 
 
-export type SearchJobsQuery = { __typename?: 'Query', searchJobs: Array<{ __typename?: 'Job', id: string, title: string }> };
+export type SearchJobsQuery = { __typename?: 'Query', searchJobs: Array<{ __typename?: 'Job', id: string, title: string, location: string, type: Types.JobType, remote: boolean, salary: number, createdAt: Date, isApplied: boolean, company: { __typename?: 'Company', id: string, name: string } }> };
 
 
 export const SearchJobsDocument = gql`
@@ -16,6 +16,16 @@ export const SearchJobsDocument = gql`
   searchJobs(input: $input) {
     id
     title
+    location
+    type
+    remote
+    salary
+    company {
+      id
+      name
+    }
+    createdAt
+    isApplied
   }
 }
     `;

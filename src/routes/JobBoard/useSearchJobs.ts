@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useMemo, useState } from 'react';
+import { useSearchJobsQuery } from './queries.generated';
 
 const useSearchJobs = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
-  // TODO
-  const results: any[] = [];
-  const loading = false;
+  const { data, previousData, loading } = useSearchJobsQuery({
+    variables: {
+      input: {
+        query: search,
+      },
+    },
+    notifyOnNetworkStatusChange: true, // This enables access to previousData
+  });
+
+  const results = useMemo(() => {
+    return data?.searchJobs || previousData?.searchJobs || [];
+  }, [data?.searchJobs, previousData?.searchJobs]);
 
   return { search, setSearch, results, isLoading: loading };
 };
