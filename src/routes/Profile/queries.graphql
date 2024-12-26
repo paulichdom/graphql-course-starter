@@ -18,3 +18,7 @@ query Profile {
     }
   }
 }
+
+mutation CancelApplication($input: CancelApplicationInput!) {
+  cancelApplication(input: $input)
+}
