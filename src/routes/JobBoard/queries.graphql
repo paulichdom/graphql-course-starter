@@ -14,3 +14,7 @@ query SearchJobs($input: SearchJobsInput!) {
     isApplied
   }
 }
+
+mutation ApplyForJob($input: ApplyForJobInput!) {
+  applyForJob(input: $input)
+}

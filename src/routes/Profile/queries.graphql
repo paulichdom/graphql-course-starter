@@ -1,0 +1,20 @@
+query Profile {
+  me {
+    id
+    name
+    email
+    appliedJobs {
+      id
+      title
+      location
+      type
+      remote
+      salary
+      company {
+        id
+        name
+      }
+      createdAt
+    }
+  }
+}
