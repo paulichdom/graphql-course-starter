@@ -2,8 +2,13 @@ import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
+import createDataloaders from './dataloaders'
 
 const JWT_SECRET = 'your-secret-key'; // In production, always use environment variable
+
+const prisma = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error']
+})
 
 export interface Context {
   prisma: PrismaClient;
@@ -12,6 +17,7 @@ export interface Context {
     login: (args: { id: string; isAdmin: boolean }) => void;
     logout: () => void;
   };
+  dataLoaders: ReturnType<typeof createDataloaders>
 }
 
 const parseToken = (token: string) => {
@@ -29,8 +35,6 @@ const parseToken = (token: string) => {
 
   return payload.success ? payload.data : null;
 };
-
-const prisma = new PrismaClient();
 
 const createContext = async ({
   req,
@@ -58,6 +62,10 @@ const createContext = async ({
         res.clearCookie('token');
       },
     },
+    dataLoaders: createDataloaders({
+      prisma,
+      userId: user?.id
+    })
   };
 };
 
