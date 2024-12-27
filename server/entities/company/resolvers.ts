@@ -1,6 +1,6 @@
-import { Resolvers } from '../../types/resolver-types';
+import { IResolvers } from '../../types/resolver-types';
 
-const resolvers: Resolvers = {
+const resolvers: IResolvers = {
   Query: {},
 };
 
