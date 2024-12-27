@@ -11,6 +11,7 @@ import { Switch, SwitchField } from "../../components/ui/switch";
 import { Button } from "../../components/ui/button";
 import { useForm } from "react-hook-form";
 import { JobType } from "../../components/JobCard";
+import { useCreateJobMutation } from "./queries.generated";
 
 interface JobFormData {
   title: string;
@@ -29,7 +30,10 @@ interface ICreateJobDialogProps {
 
 const CreateJobDialog = (props: ICreateJobDialogProps) => {
   const { isOpen, onClose } = props;
-  const loading = false;
+  
+  const [createJobMutation, {loading}] = useCreateJobMutation({
+    refetchQueries: ['Admin']
+  })
 
   const { register, handleSubmit, reset, watch, setValue } =
     useForm<JobFormData>({
@@ -40,6 +44,9 @@ const CreateJobDialog = (props: ICreateJobDialogProps) => {
     });
 
   const onSubmit = async (data: JobFormData) => {
+    await createJobMutation({
+      variables: {input: data}
+    })
     onClose();
     reset();
   };

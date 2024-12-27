@@ -1,15 +1,11 @@
+import { useMemo } from "react";
 import Admin from "./Admin";
+import { useAdminQuery } from "./queries.generated";
 
 const AdminRoute = () => {
-  const { data } = {
-    data: {
-      me: {
-        ownedJobs: [],
-      },
-    },
-  };
+  const {data} = useAdminQuery();
 
-  const jobs = data?.me?.ownedJobs ?? [];
+  const jobs = useMemo(() => data?.me?.ownedJobs ?? [], [data]);
 
   return <Admin jobs={jobs} />;
 };
